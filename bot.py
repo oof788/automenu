@@ -46,7 +46,7 @@ async def send_menu():
 async def before_send_menu():
     await bot.wait_until_ready()
     now = datetime.now()
-    target_time = now.replace(hour=7, minute=0, second=0, microsecond=0)
+    target_time = now.replace(hour=6, minute=0, second=0, microsecond=0)
     if now > target_time:
         from datetime import timedelta
         target_time = target_time + timedelta(days=1)
@@ -58,3 +58,8 @@ async def on_ready():
     send_menu.start()
 
 bot.run(TOKEN)
+
+@bot.command()
+async def menu(ctx):
+    menu = fetch_menu()
+    await ctx.send(f"📅 **Today's Menu**\n{menu}")
